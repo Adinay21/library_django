@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="{% url 'all_books' %}">Все книги</a>
+<a href="{% url 'books_for_kids' %}">Книги для детей</a>
+<a href="{% url 'books_for_teens' %}">Книги для подростков</a>
+<a href="{% url 'books_for_youth' %}">Книги для молодежи</a>
+<a href="{% url 'books_for_pensioners' %}">Книги для пенсионеров</a>
+
+{% for i in books %}
+
+<p>{{ i.name }}</p>
+<p>{{ i.price }}</p>
+
+{% endfor %}
+
+
+</body>
+</html>
