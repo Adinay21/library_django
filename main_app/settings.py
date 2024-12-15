@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'library_blog',
     'categories_of_books',
+    'basket',
 ]
 
 MIDDLEWARE = [

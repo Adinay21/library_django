@@ -1,0 +1,11 @@
+<ul>
+    {%  for i in basket_list %}
+    <li>
+        <h1>{{ i.name }}</h1>
+        <p>{{ i.book }}</p>
+        <a href="/basket_list/{{i.id}}/">Подробнее</a>
+        <a href="/basket_list/{{i.id}}/update/">Изменить</a>
+        <a href="/basket_list/{{i.id}}/delete/">Удалить</a>
+    </li>
+    {% endfor %}
+</ul>

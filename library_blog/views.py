@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import datetime
 from . import models
+from library_blog.forms import ReviewForm
+from library_blog.models import Review
 
 
 
@@ -33,4 +35,20 @@ def about_pets(request):
 def system_time(request):
     if request.method == 'GET':
         return HttpResponse(datetime.datetime.now().strftime('%I:%M %p'))
+
+def reviews(request, id):
+    if request.method == 'POST':
+        review_id = get_object_or_404(Review, id=id)
+        form = ReviewForm(request.POST, instance=review_id)
+        if form.is_valid():
+            form.save()
+            return redirect('book_detail')
+    else:
+        form = ReviewForm(instance=review_id)
+        return render(request,
+                      template_name='book_detail.html',
+                      context={
+                        'review_id': review_id,
+                        'form': form})
+
 
