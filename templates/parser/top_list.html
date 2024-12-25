@@ -1,0 +1,11 @@
+<ol>
+    {% for i in top %}
+    <li>
+        <h1>{{ i.title }}</h1>
+        <img src="{{ i.image }}" alt="" width="400" height="300">
+        <h1>{{ i.description }}</h1>
+        <h1>{{ i.readers }}</h1>
+    </li>
+    <hr><hr><hr>
+    {% endfor %}
+</ol>

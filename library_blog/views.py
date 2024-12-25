@@ -8,6 +8,8 @@ from library_blog.forms import ReviewForm
 from library_blog.models import Review
 from django.views import generic
 from library_blog.models import BookModel
+from parser_app.models import TopModel
+
 
 
 class SearchView(generic.ListView):
@@ -46,7 +48,7 @@ class BookDetailView(generic.DetailView):
 class BookListView(generic.ListView):
     template_name = 'book.html'
     context_object_name = 'book_list'
-    model = BookModel
+    model = TopModel
 
     def get_queryset(self):
         return self.model.objects.all().order_by('-id')

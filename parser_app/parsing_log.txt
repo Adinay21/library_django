@@ -1,0 +1,12 @@
+2024-12-25 01:16:21,649 - INFO - Starting parsing process...
+2024-12-25 01:16:21,649 - INFO - Sending request to URL: https://www.labirint.ru 
+2024-12-25 01:16:23,435 - INFO - Successfully fetched data from https://www.labirint.ru, Status Code: 200
+2024-12-25 01:16:23,435 - INFO - Sending request to URL: https://www.labirint.ru/books/ 
+2024-12-25 01:16:25,455 - INFO - Successfully fetched data from https://www.labirint.ru/books/, Status Code: 200
+2024-12-25 01:16:25,458 - INFO - Parsing HTML content.
+2024-12-25 01:16:25,949 - INFO - Found 0 items on the page.
+2024-12-25 01:16:25,949 - INFO - Sending request to URL: https://www.labirint.ru/books/ 
+2024-12-25 01:16:27,848 - INFO - Successfully fetched data from https://www.labirint.ru/books/, Status Code: 200
+2024-12-25 01:16:27,855 - INFO - Parsing HTML content.
+2024-12-25 01:16:28,377 - INFO - Found 0 items on the page.
+2024-12-25 01:16:28,378 - INFO - Parsing completed. Total items parsed: 0
