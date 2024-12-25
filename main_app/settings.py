@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'categories_of_books',
     'basket',
     'parser_app',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -40,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'users.middlewares.ProgerSalaryMiddleware',
 ]
 
 ROOT_URLCONF = 'main_app.urls'
