@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="{% url 'all_recipes' %}">Все рецепты</a>
+<a href="{% url 'soup_recipes' %}">Рецепты супов</a>
+<a href="{% url 'meal_recipes' %}">Рецепты вторых блюд</a>
+<a href="{% url 'books_for_youth' %}">Рецепты десертов</a>
+
+{% for i in recipes %}
+
+<p>{{ i.title }}</p>
+<p>{{ i.description }}</p>
+
+{% endfor %}
+
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<ul>
+    {%  for i in recipe_list %}
+    <li>
+        <h1>{{ i.title }}</h1>
+        <p>{{ i.description }}</p>
+        <a href="/recipe_list/{{i.id}}/">Подробнее</a>
+        <a href="/recipe_list/{{i.id}}/update/">Изменить</a>
+        <a href="/recipe_list/{{i.id}}/delete/">Удалить</a>
+    </li>
+    {% endfor %}
+</ul>

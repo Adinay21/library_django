@@ -1,0 +1,14 @@
+{% load static %}
+{% include 'components/header.html' %}
+<link rel="stylesheet" href="{% static 'recipe/confirm_delete.css' %}">
+
+<div class="form-container">
+    <form method="POST" class="delete-form">
+        {% csrf_token %}
+        <h1 class="confirm-title">Вы уверены, что хотите удалить этот рецепт?</h1>
+        <div class="button-container">
+            <button type="submit" class="confirm-button">Да</button>
+            <a href="{% url 'recipeList' %}" class="cancel-button">Нет</a>
+        </div>
+    </form>
+</div>

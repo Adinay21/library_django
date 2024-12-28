@@ -1,0 +1,6 @@
+<form action="/create_recipe/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button> type="submit">Создать заказ</button>
+
+</form>
