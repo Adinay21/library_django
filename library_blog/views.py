@@ -1,3 +1,11 @@
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.core.cache import cache
+
+
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import datetime
@@ -11,14 +19,18 @@ from library_blog.models import BookModel
 from parser_app.models import TopModel
 
 
-
+@method_decorator(cache_page(60*15), name='dispatch')
 class SearchView(generic.ListView):
     template_name = 'book.html'
     context_object_name = 'book_list'
     paginate_by = 5
 
     def get_queryset(self):
-        return models.BookModel.objects.filter(title__icontains=self.request.GET.get('q')).order_by('-id')
+        searches = cache.get('searches')
+        if not searches:
+            searches = models.BookModel.objects.filter(title__icontains=self.request.GET.get('q')).order_by('-id')
+            cache.set('searches', searches, 60*15)
+        return searches
 
     def get_context_data(self,*, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,14 +38,18 @@ class SearchView(generic.ListView):
         return context
 
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class BookDetailView(generic.DetailView):
     template_name = 'book_detail.html'
     context_object_name = 'book_id'
 
     def get_object(self, **kwargs):
         book_id = self.kwargs.get('id')
-        return get_object_or_404(BookModel, id=book_id)
+        details = cache.get('details')
+        if not details:
+            details = models.BookModel.objects.get(id=book_id)
+            cache.set('details', details, 60*15)
+        return details
 
 
 # def book_detail_view(request, id):
@@ -44,14 +60,18 @@ class BookDetailView(generic.DetailView):
 #         }
 #         return render(request, 'book_detail.html', context=context)
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class BookListView(generic.ListView):
     template_name = 'book.html'
     context_object_name = 'book_list'
     model = TopModel
 
     def get_queryset(self):
-        return self.model.objects.all().order_by('-id')
+        lists = cache.get('lists')
+        if not lists:
+            lists = self.model.objects.all().order_by('-id')
+            cache.set('lists', lists, 60*15)
+        return lists
 
 # def book_list_view(request):
 #     if request.method == 'GET':
@@ -88,4 +108,7 @@ def reviews(request, id):
                         'review_id': review_id,
                         'form': form})
 
-
+def clear_basket_cache(sender, **kwargs):
+    cache.delete('details')
+    cache.delete('searches')
+    cache.delete('lists')
